@@ -15,8 +15,8 @@ describe('API - Profile', () => {
             }).then(({ status, duration, body, headers }) => {
                 expect(status).to.eq(200)
                 expect(duration).to.be.lessThan(10000)
-                expect(body[0].status).to.equal('Gerente de Testes')
-                expect(body[0].user.name).to.eq('Lafaiete Machado')
+                expect(body[0].status).to.equal('QA Pleno')
+                expect(body[0].user.name).to.eq('Lafaiete Rodrigues Machado ')
                 expect(body[0].skills[0]).to.eq('Cypress')
                 // eslint-disable-next-line lines-around-comment
                 // validar o tamanho do array
@@ -48,14 +48,14 @@ describe('API - Profile', () => {
         })
         
         it('valida um usuário válido', () => {
-            let usuarioId = '637d72b91f37eu8464js02'
+            let usuarioId = '64db9b6296f1041428d3be7f'
             
             cy.request({
                 method: 'GET',
                 url: `${urlPerfil}/${usuarioId}`
             }).then(({ status, body }) => {
                 expect(status).to.eq(200)
-                expect(body.user.name).to.eq('Lafaiete Machado')
+                expect(body.user.name).to.eq('Lafaiete Rodrigues Machado ')
             })          
         })
 
@@ -76,10 +76,10 @@ describe('API - Profile', () => {
                     method: 'GET',
                     // eslint-disable-next-line lines-around-comment
                     // url: `/api/profile/user/${usuarioId}`
-                    url: `${urlPerfil}/${body[1].user._id}`
+                    url: `${urlPerfil}/${body[0].user._id}`
                 }).then(({ status, body }) => {
                     expect(status).to.eq(200)
-                    expect(body.status).to.eq('Outro')
+                    expect(body.status).to.eq('QA Pleno')
                 })
             })
             
