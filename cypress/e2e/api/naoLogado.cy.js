@@ -1,5 +1,6 @@
 describe('API - Profile', () => {
-    
+    let urlPerfis = '/api/profile'
+
     context('todos os perfis', () => {
 
         it('Valida a API de perfis', () => {
@@ -8,7 +9,7 @@ describe('API - Profile', () => {
             
             cy.request({
                 method: 'GET',
-                url: '/api/profile'
+                url: urlPerfis
             // eslint-disable-next-line lines-around-comment
             // }).then(respostaAPI => { // posso declarar uma variável ou usar o destruction conforme abaixo
             }).then(({ status, duration, body, headers }) => {
@@ -30,11 +31,13 @@ describe('API - Profile', () => {
 
     context('perfil específico', () => {
 
+        let urlPerfil = '/api/profile/user'
+        
         it('seleciona um usuário inválido', () => {
 
             cy.request({
                 method: 'GET',
-                url: '/api/profile/user/1',
+                url: `${urlPerfil}/1`,
                 // eslint-disable-next-line lines-around-comment
                 // passar o teste quando o result não for 200
                 failOnStatusCode: false
@@ -49,7 +52,7 @@ describe('API - Profile', () => {
             
             cy.request({
                 method: 'GET',
-                url: `/api/profile/user/${usuarioId}`
+                url: `${urlPerfil}/${usuarioId}`
             }).then(({ status, body }) => {
                 expect(status).to.eq(200)
                 expect(body.user.name).to.eq('Lafaiete Machado')
@@ -64,7 +67,7 @@ describe('API - Profile', () => {
 
             cy.request({
                 method: 'GET',
-                url: '/api/profile'
+                url: urlPerfis
             }).then(({ body }) => {
                 // eslint-disable-next-line spaced-comment
                 //usuarioId = body[1].user._id
@@ -73,7 +76,7 @@ describe('API - Profile', () => {
                     method: 'GET',
                     // eslint-disable-next-line lines-around-comment
                     // url: `/api/profile/user/${usuarioId}`
-                    url: `/api/profile/user/${body[1].user._id}`
+                    url: `${urlPerfil}/${body[1].user._id}`
                 }).then(({ status, body }) => {
                     expect(status).to.eq(200)
                     expect(body.status).to.eq('Outro')
