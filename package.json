@@ -1,0 +1,16 @@
+{
+  "name": "projetocy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cypress.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^11.1.0",
+    "eslint": "^8.46.0",
+    "eslint-plugin-cypress": "^2.14.0"
+  }
+}
