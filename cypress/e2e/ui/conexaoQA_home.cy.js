@@ -3,7 +3,7 @@ describe('pagina inicial', () => {
     beforeEach(() => {
         cy.visit('/')
     })
-    it('valida o título da página inicial', () => {
+    it('valida o título da página inicial', { tags: '@smoke' }, () => {
         cy.contains('Conectando').should('have.text', 'Conectando QAs ...').and('have.class', 'x-large')
     })
 
