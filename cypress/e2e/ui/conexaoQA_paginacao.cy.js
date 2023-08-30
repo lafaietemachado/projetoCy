@@ -10,20 +10,26 @@ describe('paginação da pagina de QAs', () => {
         cy.get('.paginationBttns li').should('not.exist')
     })
 
-    it('valida paginação com 8 perfis', () => {
-        
-        const resultadoEsperado = ['<', '1', '2', '>']
+    ;[
+        {fixture: 'paginacao_8_usuarios', resultadoEsperado: ['<', '1', '2', '>']},
+        {fixture: 'paginacao_63_usuarios', resultadoEsperado: ['<', '1', '2', '3', '4', '5', '6', '7', '8', '9', '>']},
+        {fixture: 'paginacao_64_usuarios', resultadoEsperado: ['<', '1', '2', '3', '4', '5', '6', '...', '8', '9', '10', '>']},
+    ].forEach(({ fixture, resultadoEsperado }) => {
 
-        cy.intercept('GET', '/api/profile', { fixture: 'paginacao_8_usuarios' })
-            .as('perfis')
-
-        cy.visit('/perfis')
-
-        cy.get('.paginationBttns li')
-            .each((el, index) => {
-
-                cy.wrap(el)
-                    .should('have.text', resultadoEsperado[index])
-            })
+        it(`validar a ${fixture}`, () => {
+    
+            cy.intercept('GET', '/api/profile', { fixture: fixture })
+                .as('perfis')
+    
+            cy.visit('/perfis')
+    
+            cy.get('.paginationBttns li')
+                .each((el, index) => {
+    
+                    cy.wrap(el)
+                        .should('have.text', resultadoEsperado[index])
+                })
+        })
     })
+    
 })
